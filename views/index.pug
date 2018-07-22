@@ -17,7 +17,7 @@ block content
         action='/upload/image'
       )
         .form-group
-          input#exampleInputFile.form-control-file(type='file' name='image')
+          input#exampleInputFile.form-control-file(type='file' name='image' multiple)
         button.btn.btn-primary(type='submit')
           | Submit
       table.table
@@ -32,15 +32,19 @@ block content
             th
               | Status
         tbody
-          tr
-            td
-              | 1
-            td
-              | TB - Monthly
-            td
-              | 01/04/2012
-            td
-              | Default
+        
+          <% drinks.forEach(function(drink) { %>
+            tr
+              td
+                | 1
+              td
+                | TB - Monthly
+              td
+                | 01/04/2012
+              td
+                | Default
+          <% }); %>
+          
     .col-md-4
       img.preview(alt='Bootstrap Image Preview', src='https://www.layoutit.com/img/sports-q-c-140-140-3.jpg')
       .row

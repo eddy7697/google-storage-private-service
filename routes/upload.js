@@ -1,5 +1,6 @@
 var express = require('express');
 var fs = require('fs');
+var util = require('util');
 var formidable = require('formidable');
 var router = express.Router();
 
@@ -12,15 +13,23 @@ router.post('/', function(req, res, next) {
   const form = new formidable.IncomingForm();
   const filePath = './uploads';
 
+  form.uploadDir = filePath;
+  // const filePath = './uploads';
+
   fs.readdir(filePath, function (err, files) {
     console.log(files);
   })
+  
+  form.on('file', function(field, file) {
+    //rename the incoming file to the file's name
+    fs.rename(file.path, form.uploadDir + "/" + file.name);
+  });
 
-  form.parse(req, function (err, fields, files) {
-    console.log(files)
-    res.write('File uploaded.');
-    res.end();
-  })
+  form.parse(req, function(err, fields, files) {
+    res.writeHead(200, {'content-type': 'text/plain'});
+    res.write('received upload:\n\n');
+    res.end(util.inspect({fields: fields, files: files}));
+  });
 });
 
 module.exports = router;
