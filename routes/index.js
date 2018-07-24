@@ -71,6 +71,7 @@ router.get('/', function(req, res, next) {
   Promise.all([
     uploadFilesToStorage
   ]).then((results) => {
+    console.log(results[0])
     res.render('index', { 
       title: 'Express',
       images: images ,
