@@ -29,10 +29,10 @@ block content
         tbody
           //- <% images.forEach(function(image) { 
           //- <% }) %>
-          - images.forEach(function(image){
+          - storageFiles.forEach(function(file){
             tr
               td
-                | #{image}
+                | #{file.name}
               td
                 | Default
           - })
