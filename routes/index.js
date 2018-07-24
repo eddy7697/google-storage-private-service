@@ -16,6 +16,7 @@ router.get('/', function(req, res, next) {
   const filePath = './uploads';
   const bucketName = 'nearlinetest-mark';
   const images = fs.readdirSync(filePath);
+  var storageFiles = [];
 
   console.log(images);
 
@@ -27,7 +28,7 @@ router.get('/', function(req, res, next) {
 
       console.log('Files:');
       files.forEach(file => {
-        console.log(file);
+        storageFiles.push(file);
       });
     })
     .catch(err => {
@@ -36,7 +37,8 @@ router.get('/', function(req, res, next) {
 
   res.render('index', { 
     title: 'Express',
-    images: images 
+    images: images ,
+    storageFiles: storageFiles
   });
 });
 
