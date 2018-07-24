@@ -16,30 +16,35 @@ router.get('/', function(req, res, next) {
   const filePath = './uploads';
   const bucketName = 'nearlinetest-mark';
   const images = fs.readdirSync(filePath);
-  var storageFiles = [];
 
-  console.log(images);
+  const getFilesPromise = new Promise(function(resolve, reject) {
+      storage
+        .bucket(bucketName)
+        .getFiles()
+        .then(results => {
+          const files = results[0];
 
-  storage
-    .bucket(bucketName)
-    .getFiles()
-    .then(results => {
-      const files = results[0];
-
-      console.log('Files:');
-      files.forEach(file => {
-        storageFiles.push(file);
-      });
-    })
-    .catch(err => {
-      console.error('ERROR:', err);
+          resolve(files)
+        })
+        .catch(err => {
+          reject(err)
+        });      
     });
-
-  res.render('index', { 
-    title: 'Express',
-    images: images ,
-    storageFiles: storageFiles
-  });
+  
+  getFilesPromise.then(function(value) {
+    res.render('index', { 
+      title: 'Express',
+      images: images ,
+      storageFiles: files
+    });
+  }, function(reason) {
+    res.render('index', { 
+      title: 'Express',
+      images: images ,
+      storageFiles: []
+    });
+  })
+  
 });
 
 module.exports = router;
