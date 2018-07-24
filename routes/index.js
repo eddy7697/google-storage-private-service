@@ -20,7 +20,7 @@ router.get('/', function(req, res, next) {
   console.log(images);
 
   storage
-    .bucket(bucketName)
+    .bucket('nearlinetest-mark')
     .getFiles()
     .then(results => {
       const files = results[0];
