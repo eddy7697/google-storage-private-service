@@ -44,7 +44,8 @@ router.get('/', function(req, res, next) {
           },
         })
         .then(() => {
-          if (images) {
+          if (images.length !== 0) {
+            console.log('deleting')
             fs.unlinkSync(fileName);
             callback()
           } else {
@@ -60,19 +61,23 @@ router.get('/', function(req, res, next) {
 
   })
   
-  getFilesPromise.then(function(files) {
+  Promise.all([
+    getFilesPromise,
+    uploadFilesToStorage
+  ]).then((results) => {
     res.render('index', { 
       title: 'Express',
       images: images ,
-      storageFiles: files
+      storageFiles: results[0]
     });
-  }, function(reason) {
+  }, (err) => {
+    console.log(err)
     res.render('index', { 
       title: 'Express',
       images: images ,
       storageFiles: []
     });
-  })
+  });
   
 });
 
