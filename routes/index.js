@@ -46,7 +46,17 @@ router.get('/', function(req, res, next) {
         })
         .then(() => {
           fs.unlinkSync(fileName);
-          resolve('success')       
+          storage
+            .bucket(bucketName)
+            .getFiles()
+            .then(results => {
+              const files = results[0];
+
+              resolve(files)
+            })
+            .catch(err => {
+              reject(err)
+            });          
         })
         .catch(err => {
           reject(err)
@@ -59,7 +69,6 @@ router.get('/', function(req, res, next) {
   })
   
   Promise.all([
-    getFilesPromise,
     uploadFilesToStorage
   ]).then((results) => {
     res.render('index', { 
