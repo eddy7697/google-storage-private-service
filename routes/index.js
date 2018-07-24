@@ -19,6 +19,21 @@ router.get('/', function(req, res, next) {
 
   console.log(images);
 
+  storage
+    .bucket(bucketName)
+    .getFiles()
+    .then(results => {
+      const files = results[0];
+
+      console.log('Files:');
+      files.forEach(file => {
+        console.log(file.name);
+      });
+    })
+    .catch(err => {
+      console.error('ERROR:', err);
+    });
+
   storage.getBuckets(function(err, buckets) {
     if (!err) {
       // buckets is an array of Bucket objects.
@@ -32,7 +47,7 @@ router.get('/', function(req, res, next) {
   var callback = function(err, buckets, nextQuery, apiResponse) {
     if (nextQuery) {
       // More results exist.
-      console.log(buckets)
+      // console.log(buckets)
       storage.getBuckets(nextQuery, callback);
     }
   
@@ -55,7 +70,7 @@ router.get('/', function(req, res, next) {
   storage.getBuckets().then(function(data) {
     var buckets = data[0];
 
-    console.log(buckets)
+    // console.log(buckets)
   });
 
   res.render('index', { 
