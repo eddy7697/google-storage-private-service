@@ -9,13 +9,14 @@ const storage = new Storage({
   projectId: projectId
 })
 
-const bucketName = '123456789';
+const bucketName = 'nearlinetest-mark';
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  const filePath = './uploads';
-  const bucketName = 'nearlinetest-mark';
+  const filePath = './uploads';  
   const images = fs.readdirSync(filePath);
+
+  
 
   const getFilesPromise = new Promise(function(resolve, reject) {
       storage
@@ -30,6 +31,34 @@ router.get('/', function(req, res, next) {
           reject(err)
         });      
     });
+  
+  const uploadFilesToStorage = new Promise((resolve, reject) => {
+    var callback = () => {
+      var fileName = filePath + '/' + images[0];
+      storage
+        .bucket(bucketName)
+        .upload(fileName, {
+          gzip: true,
+          metadata: {
+            cacheControl: 'public, max-age=31536000',
+          },
+        })
+        .then(() => {
+          if (images) {
+            fs.unlinkSync(fileName);
+            callback()
+          } else {
+            console.log('success')
+            resolve('success')
+          }          
+        })
+        .catch(err => {
+          reject(err)
+          console.error('ERROR:', err);
+        });
+    }
+
+  })
   
   getFilesPromise.then(function(files) {
     res.render('index', { 
@@ -46,5 +75,26 @@ router.get('/', function(req, res, next) {
   })
   
 });
+
+function uploadFile(bucketName, filename) {
+  const Storage = require('@google-cloud/storage');
+  const storage = new Storage();
+  
+  storage
+    .bucket(bucketName)
+    .upload(filename, {
+      gzip: true,
+      metadata: {
+        cacheControl: 'public, max-age=31536000',
+      },
+    })
+    .then(() => {
+      console.log(`${filename} uploaded to ${bucketName}.`);
+    })
+    .catch(err => {
+      console.error('ERROR:', err);
+    });
+  // [END storage_upload_file]
+}
 
 module.exports = router;
