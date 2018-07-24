@@ -46,24 +46,24 @@ router.get('/', function(req, res, next) {
         })
         .then(() => {
           fs.unlinkSync(fileName);
-          storage
-            .bucket(bucketName)
-            .getFiles()
-            .then(results => {
-              const files = results[0];
-
-              resolve(files)
-            })
-            .catch(err => {
-              reject(err)
-            });          
+                  
         })
         .catch(err => {
           reject(err)
           console.error('ERROR:', err);
         });
     } else {
-      resolve('success')  
+      storage
+        .bucket(bucketName)
+        .getFiles()
+        .then(results => {
+          const files = results[0];
+
+          resolve(files)
+        })
+        .catch(err => {
+          reject(err)
+        });  
     }
     
   })
