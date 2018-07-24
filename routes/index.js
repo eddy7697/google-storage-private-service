@@ -33,7 +33,9 @@ router.get('/', function(req, res, next) {
     });
   
   const uploadFilesToStorage = new Promise((resolve, reject) => {
-    var fileName = filePath + '/' + images[0];
+    if (images.length > 0) {
+      var fileName = filePath + '/' + images[0];
+
       storage
         .bucket(bucketName)
         .upload(fileName, {
@@ -50,6 +52,10 @@ router.get('/', function(req, res, next) {
           reject(err)
           console.error('ERROR:', err);
         });
+    } else {
+      resolve('success')  
+    }
+    
   })
   
   Promise.all([
