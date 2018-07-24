@@ -21,57 +21,22 @@ router.get('/', function(req, res, next) {
 
   storage
     .bucket('nearlinetest-mark')
-    .getFiles()
-    .then(results => {
-      const files = results[0];
-
-      console.log('Files:');
-      files.forEach(file => {
-        console.log(file.name);
-      });
+    .upload('/usr/local/google-storage-sample/uploads/000002.jpg', {
+      // Support for HTTP requests made with `Accept-Encoding: gzip`
+      gzip: true,
+      metadata: {
+        // Enable long-lived HTTP caching headers
+        // Use only if the contents of the file will never change
+        // (If the contents will change, use cacheControl: 'no-cache')
+        cacheControl: 'public, max-age=31536000',
+      },
+    })
+    .then(() => {
+      console.log(`${filename} uploaded to ${bucketName}.`);
     })
     .catch(err => {
       console.error('ERROR:', err);
     });
-
-  storage.getBuckets(function(err, buckets) {
-    if (!err) {
-      // buckets is an array of Bucket objects.
-    }
-  });
-  
-  //-
-  // To control how many API requests are made and page through the results
-  // manually, set `autoPaginate` to `false`.
-  //-
-  var callback = function(err, buckets, nextQuery, apiResponse) {
-    if (nextQuery) {
-      // More results exist.
-      // console.log(buckets)
-      storage.getBuckets(nextQuery, callback);
-    }
-  
-    // The `metadata` property is populated for you with the metadata at the
-    // time of fetching.
-    buckets[0].metadata;
-  
-    // However, in cases where you are concerned the metadata could have
-    // changed, use the `getMetadata` method.
-    buckets[0].getMetadata(function(err, metadata, apiResponse) {});
-  };
-  
-  storage.getBuckets({
-    autoPaginate: false
-  }, callback);
-  
-  //-
-  // If the callback is omitted, we'll return a Promise.
-  //-
-  storage.getBuckets().then(function(data) {
-    var buckets = data[0];
-
-    // console.log(buckets)
-  });
 
   res.render('index', { 
     title: 'Express',
