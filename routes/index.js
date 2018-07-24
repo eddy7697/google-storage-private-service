@@ -33,8 +33,7 @@ router.get('/', function(req, res, next) {
     });
   
   const uploadFilesToStorage = new Promise((resolve, reject) => {
-    var callback = () => {
-      var fileName = filePath + '/' + images[0];
+    var fileName = filePath + '/' + images[0];
       storage
         .bucket(bucketName)
         .upload(fileName, {
@@ -44,21 +43,13 @@ router.get('/', function(req, res, next) {
           },
         })
         .then(() => {
-          if (images.length !== 0) {
-            console.log('deleting')
-            fs.unlinkSync(fileName);
-            callback()
-          } else {
-            console.log('success')
-            resolve('success')
-          }          
+          fs.unlinkSync(fileName);
+          resolve('success')       
         })
         .catch(err => {
           reject(err)
           console.error('ERROR:', err);
         });
-    }
-
   })
   
   Promise.all([
