@@ -31,7 +31,7 @@ router.get('/', function(req, res, next) {
         });      
     });
   
-  getFilesPromise.then(function(value) {
+  getFilesPromise.then(function(files) {
     res.render('index', { 
       title: 'Express',
       images: images ,
