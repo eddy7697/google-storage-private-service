@@ -21,9 +21,9 @@ router.get('/', function(req, res, next) {
 
   storage.createBucket(bucketName)
          .then((res) => {
-            console.log(res)
+            // console.log(res)
          }).catch(err => {
-            console.error('error', err);
+            // console.error('error', err);
          });
          
   storage.getBuckets(function(err, buckets) {
