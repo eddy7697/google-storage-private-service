@@ -25,7 +25,13 @@ router.get('/', function(req, res, next) {
          }).catch(err => {
             console.error('error', err);
          });
-
+         
+  storage.getBuckets(function(err, buckets) {
+    if (!err) {
+      // buckets is an array of Bucket objects.
+    }
+    console.log(buckets)
+  });
 
   res.render('index', { 
     title: 'Express',
