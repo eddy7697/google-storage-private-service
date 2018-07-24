@@ -9,7 +9,7 @@ const storage = new Storage({
   projectId: projectId
 })
 
-const bucketName = 'my-new-bucket';
+const bucketName = '123456789';
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
