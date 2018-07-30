@@ -9,7 +9,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var uploadRouter = require('./routes/upload');
 var visionRouter = require('./routes/vision');
-var fileRouter = require('./routes/file');
+var metaRouter = require('./routes/meta');
 
 var app = express();
 
