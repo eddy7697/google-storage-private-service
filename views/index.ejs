@@ -23,8 +23,8 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr @click="getfiles()">
-                            <td>file.name</td>
+                        <tr @click="getMeta(item)" v-for="(item, index) in fileList">
+                            <td>{{item.name}}</td>
                             <td>Default</td>
                         </tr>
                     </tbody>
