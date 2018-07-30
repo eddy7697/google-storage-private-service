@@ -26,7 +26,6 @@ router.get('/', function(req, res, next) {
         .catch(err => {
         console.error('ERROR:', err);
         });
-  res.send('respond with a resource');
 });
 
 module.exports = router;
