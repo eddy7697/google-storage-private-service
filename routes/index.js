@@ -1,10 +1,8 @@
-var express = require('express');
+const express = require('express');
 const Storage = require('@google-cloud/storage');
-var fs = require('fs');
-var router = express.Router();
-
+const fs = require('fs');
+const router = express.Router();
 const projectId = 'tonal-bank-198910';
-
 const storage = new Storage({
   projectId: projectId
 })
@@ -14,9 +12,7 @@ const bucketName = 'nearlinetest-mark';
 /* GET home page. */
 router.get('/', function(req, res, next) {
   const filePath = './uploads';  
-  const images = fs.readdirSync(filePath);
-
-  
+  const images = fs.readdirSync(filePath);  
 
   const getFilesPromise = new Promise(function(resolve, reject) {
       storage
