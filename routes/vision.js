@@ -11,10 +11,10 @@ var bucketName = 'nearlinetest-mark';
 router.get('/:img', function(req, res, next) {
 'use strict';
 
-console.log(req.params.taskId);
+console.log(req.params.img);
 
 client
-  .labelDetection(`gs://${bucketName}/resources/city.jpg`)
+  .labelDetection(`gs://${bucketName}/${req.params.img}`)
   .then(results => {
     const labels = results[0].labelAnnotations;
 
