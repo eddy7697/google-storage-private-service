@@ -32,7 +32,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/vision', visionRouter);
-app.use('/file', fileRouter);
+app.use('/meta', metaRouter);
 app.use('/upload/image', uploadRouter);
 
 // catch 404 and forward to error handler
