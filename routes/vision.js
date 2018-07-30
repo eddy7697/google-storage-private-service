@@ -16,7 +16,7 @@ client
   .then(results => {
     const labels = results[0].labelAnnotations;
 
-    console.log(results);
+    res.send(results);
   })
   .catch(err => {
     console.error('ERROR:', err);
