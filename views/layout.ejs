@@ -23,7 +23,12 @@
             el: '#app',
             data: {
                 message: 'Hello Vue!',
-                fileList: []
+                fileList: [],
+                target: {
+                    name: null,
+                    link: null,
+                    feature: []
+                }
             },
             created() {
                 this.getfiles()
