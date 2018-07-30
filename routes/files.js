@@ -78,11 +78,6 @@ router.get('/', function(req, res, next) {
     uploadFilesToStorage
   ]).then((results) => {
     res.send(results[0]);
-    res.render('index', { 
-      title: 'Express',
-      images: images ,
-      storageFiles: results[0]
-    });
   }, (err) => {
     res.send([]);
   });
