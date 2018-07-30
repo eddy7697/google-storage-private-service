@@ -27,10 +27,15 @@
             },
             methods: {
                 getfiles() {
-                    console.log($)
+                    let self = this;
+
                     $.get('/files', function(result) {
                         console.log(result)
+                        self.fileList = result;
                     })
+                },
+                getMeta(item) {
+                    console.log(item)
                 }
             }
         })
