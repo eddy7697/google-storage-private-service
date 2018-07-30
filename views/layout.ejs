@@ -47,7 +47,7 @@
                     $('#loading-bar').fadeIn(100)
                     $.get(`/meta?name=${item.name}`, function(result) {
                         self.target.name = result.name
-                        self.target.link = result.link
+                        self.target.link = result.mediaLink
                         self.getFeature(item);
                         $('#loading-bar').fadeOut(100)
                         console.log(result)
