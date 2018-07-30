@@ -19,13 +19,13 @@
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Status</th>
+                            <th>Bucket Name</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr @click="getMeta(item)" v-for="(item, index) in fileList">
                             <td>{{item.name}}</td>
-                            <td>Default</td>
+                            <td>{{item.bucket.name}}</td>
                         </tr>
                     </tbody>
                 </table>
