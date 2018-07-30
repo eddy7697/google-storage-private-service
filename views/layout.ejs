@@ -21,6 +21,9 @@
             data: {
                 message: 'Hello Vue!'
             },
+            created() {
+                this.getfiles()
+            },
             methods: {
                 getfiles() {
                     $.ajax({
