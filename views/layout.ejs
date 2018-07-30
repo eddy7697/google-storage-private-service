@@ -35,10 +35,13 @@
                     $.get('/files', function(result) {
                         console.log(result)
                         self.fileList = result;
+                        $('#loading-bar').fadeOut(100)
                     })
                 },
                 getMeta(item) {
+                    $('#loading-bar').fadeIn(100)
                     $.get(`/meta?name=${item.name}`, function(result) {
+                        $('#loading-bar').fadeOut(100)
                         console.log(result)
                     })
                 }
