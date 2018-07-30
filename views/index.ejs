@@ -33,8 +33,10 @@
             <div class="col-md-4">
                 <div class="jumbotron">
                     <img v-bind:src="target.link" alt="">
+                    <br>
                     <strong>{{ target.name }}</strong>
-                    <table v-for="(item, index) in target.feature">
+                    <br>
+                    <table class="table" v-for="(item, index) in target.feature">
                         <tr>
                             <td>
                                 描述
