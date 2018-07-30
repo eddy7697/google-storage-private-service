@@ -37,6 +37,12 @@
                 getfiles() {
                     let self = this;
 
+                    this.target = {
+                        name: null,
+                        link: null,
+                        feature: []
+                    }
+
                     $.get('/files', function(result) {
                         self.fileList = result;
                         $('#loading-bar').fadeOut(100)

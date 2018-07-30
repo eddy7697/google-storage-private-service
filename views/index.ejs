@@ -32,27 +32,25 @@
             </div>
             <div class="col-md-4">
                 <div class="jumbotron">
-                    <img v-bind:src="target.link" alt="">
+                    <img v-bind:src="target.link" alt="" style="margin-bottom: 20px;">
                     <br>
                     <strong>{{ target.name }}</strong>
                     <br>
-                    <table class="table" v-for="(item, index) in target.feature">
-                        <tr>
-                            <td>
-                                描述
-                            </td>
-                            <td>
-                                {{item.description}}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                分數
-                            </td>
-                            <td>
-                                {{item.score}}
-                            </td>
-                        </tr>
+                    <table class="table" style="margin-top: 20px;">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>描述</th>
+                                <th>分數</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="(item, index) in target.feature">
+                                <td>{{index}}</td>
+                                <td>{{item.description}}</td>
+                                <td>{{item.score}}</td>
+                            </tr>
+                        </tbody>
                     </table>
                 </div>
             </div>
