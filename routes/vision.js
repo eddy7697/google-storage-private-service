@@ -12,10 +12,11 @@ router.get('/', function(req, res, next) {
   client
     .faceDetection(`gs://${bucketName}/${fileName}`)
     .then(result => {
-        console.log(result)
+        
+        console.log('Detect success', result)
     })
     .catch(err => {
-        console.log(err)
+        console.log('Detect fail....', err)
     })
     
   res.send('respond with a resource');
