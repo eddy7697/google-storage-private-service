@@ -49,6 +49,15 @@
                     $.get(`/meta?name=${item.name}`, function(result) {
                         self.target.name = result.name
                         self.target.link = result.link
+                        self.getFeature(item);
+                        $('#loading-bar').fadeOut(100)
+                        console.log(result)
+                    })
+                },
+                getFeature(item) {
+                    var self = this;
+                    $('#loading-bar').fadeIn(100)
+                    $.get(`/vision?img=${item.name}`, function(result) {
                         $('#loading-bar').fadeOut(100)
                         console.log(result)
                     })
