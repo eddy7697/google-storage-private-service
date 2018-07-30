@@ -8,7 +8,7 @@ var bucketName = 'nearlinetest-mark';
 
 
 /* GET users listing. */
-router.get('/:img', function(req, res, next) {
+router.get('/', function(req, res, next) {
 'use strict';
 
 console.log(req);
