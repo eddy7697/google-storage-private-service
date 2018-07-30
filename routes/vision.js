@@ -11,7 +11,7 @@ var bucketName = 'nearlinetest-mark';
 router.get('/', function(req, res, next) {
 'use strict';
 
-console.log(req);
+console.log(req.params);
 
 client
   .labelDetection(`gs://${bucketName}/resources/city.jpg`)
