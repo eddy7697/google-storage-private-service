@@ -12,7 +12,7 @@ router.get('/', function(req, res, next) {
 'use strict';
 
 client
-  .labelDetection('gs://${bucketName}/resources/city.jpg')
+  .labelDetection(`gs://${bucketName}/resources/city.jpg`)
   .then(results => {
     const labels = results[0].labelAnnotations;
 
