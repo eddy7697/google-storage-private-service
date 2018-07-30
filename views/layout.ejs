@@ -26,9 +26,8 @@
             },
             methods: {
                 getfiles() {
-                    $.ajax({
-                        url: '/files',
-                        type: 'GET'
+                    $.get('/files', function() {
+                        /* 成功拿到資料，然後... */
                     })
                 }
             }
