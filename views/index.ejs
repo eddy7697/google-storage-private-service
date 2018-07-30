@@ -1,0 +1,45 @@
+<%# views/index.ejs %>
+
+<% extend('layout') %>
+
+<div id="app">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="page-header">
+                    <h1>Google Cloud Storage</h1>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <form role="form" enctype="multipart/form-data" method="POST" action="/upload/image">
+                    <div class="form-group"><input class="form-control-file" id="exampleInputFile" type="file" name="image" multiple="multiple" /></div><button class="btn btn-primary" type="submit">Submit</button></form>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr @click="getfiles()">
+                            <td>file.name</td>
+                            <td>Default</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-4">
+                <div class="jumbotron">
+                    <h2>Vision Feature Rank</h2>
+                    <p>[{"feature":"qwer","rank":99},{"fearure":"asdf","rank":87},{"feature":"zxcv","rank":55},{"feature":"rtyu","rank":34}]</p>
+                    <p><a class="btn btn-primary btn-large" href="#">Show more</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
