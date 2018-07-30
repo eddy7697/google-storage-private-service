@@ -10,7 +10,7 @@ var fileName = '000002.jpg';
 /* GET users listing. */
 router.get('/', function(req, res, next) {
   client
-    .faceDetection(`gs://${bucketName}/${fileName}`)
+    .detectLabelsGCS(`gs://${bucketName}/${fileName}`)
     .then(result => {
         
         console.log('Detect success', result)
