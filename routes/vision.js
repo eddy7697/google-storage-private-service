@@ -5,7 +5,6 @@ const vision = require('@google-cloud/vision');
 const client = new vision.ImageAnnotatorClient();
 
 var bucketName = 'nearlinetest-mark';
-var fileName = '000002.jpg';
 
 
 /* GET users listing. */
@@ -17,7 +16,7 @@ client
   .then(results => {
     const labels = results[0].labelAnnotations;
 
-    console.log(labels);
+    console.log(results);
   })
   .catch(err => {
     console.error('ERROR:', err);
