@@ -34,8 +34,7 @@
                 <div class="jumbotron">
                     <img v-bind:src="target.link" alt="">
                     <strong>{{ target.name }}</strong>
-                    {{target.feature}}
-                    <table v-for="(item, index) in fileList">
+                    <table v-for="(item, index) in target.feature">
                         <tr>
                             <td>
                                 描述
