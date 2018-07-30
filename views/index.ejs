@@ -35,7 +35,24 @@
                     <img v-bind:src="target.link" alt="">
                     <strong>{{ target.name }}</strong>
                     {{target.feature}}
-                    
+                    <table v-for="(item, index) in fileList">
+                        <tr>
+                            <td>
+                                描述
+                            </td>
+                            <td>
+                                {{item.description}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                分數
+                            </td>
+                            <td>
+                                {{item.score}}
+                            </td>
+                        </tr>
+                    </table>
                 </div>
             </div>
         </div>
