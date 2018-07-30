@@ -38,7 +38,6 @@
                     let self = this;
 
                     $.get('/files', function(result) {
-                        console.log(result)
                         self.fileList = result;
                         $('#loading-bar').fadeOut(100)
                     })
@@ -57,9 +56,9 @@
                 getFeature(item) {
                     var self = this;
                     $('#loading-bar').fadeIn(100)
-                    $.get(`/vision?img=${item.name}`, function(result) {
+                    $.get(`/vision?img=${item.name}`, function(result) {                        
+                        self.target.feature = result[0].labelAnnotations
                         $('#loading-bar').fadeOut(100)
-                        console.log(result)
                     })
                 }
             }
