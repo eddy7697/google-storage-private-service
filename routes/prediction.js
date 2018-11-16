@@ -26,7 +26,7 @@ router.get('/', function(req, res, next) {
         }
     }
 
-    fs.writeFileSync('./public/uploads/request.json', payload)
+    fs.writeFileSync('./public/uploads/request.json', JSON.stringify(payload))
 
     res.send(payload);
 });
