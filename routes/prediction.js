@@ -14,23 +14,26 @@ const bucketName = 'nearlinetest-mark';
 
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
-    exec('pwd', (err, path, stderr) => {
-        if (err) {
-            return
-        }
+router.get('/:fileName', function(req, res, next) {
+    let fileName = req.params.fileName
 
-        console.log(path)
-    })
-    exec(`curl -X POST -H "Content-Type: application/json" \
-        -H "Authorization: Bearer $(gcloud auth application-default print-access-token)" \
-        https://automl.googleapis.com/v1beta1/projects/${projectId}/locations/${location}/models/${modelId}:predict -d @/root/google-storage-private-service/public/uploads/request.json`, (err, stdout, stderr) => {
-        if (err) {
-            return
-        }
+    console.log(btoa(fileName))
+    // exec('pwd', (err, path, stderr) => {
+    //     if (err) {
+    //         return
+    //     }
 
-        console.log(stdout)
-    })   
+    //     console.log(path)
+    // })
+    // exec(`curl -X POST -H "Content-Type: application/json" \
+    //     -H "Authorization: Bearer $(gcloud auth application-default print-access-token)" \
+    //     https://automl.googleapis.com/v1beta1/projects/${projectId}/locations/${location}/models/${modelId}:predict -d @/root/google-storage-private-service/public/uploads/request.json`, (err, stdout, stderr) => {
+    //     if (err) {
+    //         return
+    //     }
+
+    //     console.log(stdout)
+    // })   
     // var client = new automl.v1beta1.PredictionServiceClient();
     // var formattedName = client.modelPath(projectId, location, modelId);
     // var payload = fs.readFileSync('./public/uploads/request.json')
