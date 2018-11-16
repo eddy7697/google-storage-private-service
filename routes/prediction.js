@@ -2,6 +2,7 @@ const express = require('express');
 const fs = require('fs');
 const { exec } = require('child_process')
 const automl = require('@google-cloud/automl');
+const Buffer = require('buffer').Buffer;
 
 const router = express.Router();
 
@@ -17,7 +18,7 @@ const bucketName = 'nearlinetest-mark';
 router.get('/:fileName', function(req, res, next) {
     let fileName = req.params.fileName
 
-    console.log(btoa(fileName))
+    console.log(Buffer(fileName, 'base64').toString())
     // exec('pwd', (err, path, stderr) => {
     //     if (err) {
     //         return
