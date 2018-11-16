@@ -41,7 +41,18 @@ router.get('/:fileName', function(req, res, next) {
             return
         }
 
-        res.send(fs.readFileSync(payloadFile));
+        res.send(`${path}${payloadFile}`)
+
+        // res.send(fs.readFileSync(payloadFile));
+        // exec(`curl -X POST -H "Content-Type: application/json" \
+        //     -H "Authorization: Bearer $(gcloud auth application-default print-access-token)" \
+        //     https://automl.googleapis.com/v1beta1/projects/${projectId}/locations/${location}/models/${modelId}:predict -d @/root/google-storage-private-service/public/uploads/request.json`, (err, stdout, stderr) => {
+        //     if (err) {
+        //         return
+        //     }
+
+        //     res.send(stdout)
+        // })  
     })
     // exec(`curl -X POST -H "Content-Type: application/json" \
     //     -H "Authorization: Bearer $(gcloud auth application-default print-access-token)" \
