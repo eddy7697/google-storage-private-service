@@ -19,7 +19,7 @@ const corsOptions = {
   origin: [
     'http://localhost:8080',
     'http://localhost:8081',
-    'https://google.egith.net'
+    'http://google.egith.net'
   ],
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
   allowedHeaders: ['Content-Type', 'Authorization'],
