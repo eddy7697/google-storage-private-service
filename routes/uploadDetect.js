@@ -11,7 +11,7 @@ router.get('/', function(req, res, next) {
 
 router.post('/', function(req, res, next) {
   const form = new formidable.IncomingForm();
-  const filePath = './public/uploads';
+  const filePath = './uploads';
 
   form.uploadDir = filePath;
   // const filePath = './uploads';
