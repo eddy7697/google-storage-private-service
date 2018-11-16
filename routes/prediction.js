@@ -16,9 +16,9 @@ const bucketName = 'nearlinetest-mark';
 
 /* GET users listing. */
 router.get('/:fileName', function(req, res, next) {
-    let fileName = req.params.fileName
+    let fileName = Buffer(req.params.fileName, 'base64').toString()
 
-    console.log(Buffer(fileName, 'base64').toString())
+    console.log(fileName)
     // exec('pwd', (err, path, stderr) => {
     //     if (err) {
     //         return
