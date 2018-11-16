@@ -6,6 +6,7 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "@google-cloud/automl": "^0.1.2",
     "@google-cloud/storage": "^1.7.0",
     "@google-cloud/vision": "googleapis/nodejs-vision",
     "cookie-parser": "~1.4.3",

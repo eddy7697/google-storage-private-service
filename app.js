@@ -13,6 +13,7 @@ var uploadDetectRouter = require('./routes/uploadDetect');
 var visionRouter = require('./routes/vision');
 var metaRouter = require('./routes/meta');
 var filesRouter = require('./routes/files');
+var predictionRouter = require('./routes/prediction');
 
 const corsOptions = {
   origin: [
@@ -50,6 +51,7 @@ app.use('/meta', metaRouter);
 app.use('/files', filesRouter);
 app.use('/upload/image', uploadRouter);
 app.use('/upload/detect/image', uploadDetectRouter)
+app.use('/prediction', predictionRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
