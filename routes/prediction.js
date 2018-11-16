@@ -15,7 +15,9 @@ const bucketName = 'nearlinetest-mark';
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-    exec(`pwd`, (err, stdout, stderr) => {
+    exec(`curl -X POST -H "Content-Type: application/json" \
+        -H "Authorization: Bearer $(gcloud auth application-default print-access-token)" \
+        https://automl.googleapis.com/v1beta1/projects/tonal-bank-198910/locations/us-central1/models/ICN4828686137575711807:predict -d /root/google-storage-private-service/public/uploads/request.json`, (err, stdout, stderr) => {
         // if (err) {
         //     return
         // }
