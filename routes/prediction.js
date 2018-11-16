@@ -20,11 +20,13 @@ router.get('/', function(req, res, next) {
 
     let payload = {
         "payload": {
-          "image": {
-            "imageBytes": base64Encode
-          },
+            "image": {
+                "imageBytes": base64Encode
+            },
         }
-      }
+    }
+
+    fs.writeFileSync('./public/uploads/request.json', payload)
 
     res.send(payload);
 });
