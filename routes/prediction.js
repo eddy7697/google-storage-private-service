@@ -41,7 +41,7 @@ router.get('/:fileName', function(req, res, next) {
             return
         }
 
-        res.send(`${path}${payloadFile}`)
+        res.send(`${path.substring(0, path.length-1)}${payloadFile.substr(1)}`)
 
         // res.send(fs.readFileSync(payloadFile));
         // exec(`curl -X POST -H "Content-Type: application/json" \
