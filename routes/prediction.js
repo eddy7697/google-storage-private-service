@@ -1,7 +1,8 @@
-var express = require('express');
+const express = require('express');
+const fs = require('fs');
 const automl = require('@google-cloud/automl');
 
-var router = express.Router();
+const router = express.Router();
 
 const projectId = 'tonal-bank-198910';
 const location = 'us-central1'
@@ -11,7 +12,13 @@ const bucketName = 'nearlinetest-mark';
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-    res.send('test');
+    let filePath = './public/uploads/335273.jpg'
+    let bitmap = fs.readFileSync(filePath);
+    let base64Encode
+    
+    base64Encode = new Buffer(bitmap).toString('base64');
+
+    res.send(base64Encode);
 });
 
 module.exports = router;
