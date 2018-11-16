@@ -18,7 +18,15 @@ router.get('/', function(req, res, next) {
     
     base64Encode = new Buffer(bitmap).toString('base64');
 
-    res.send(base64Encode);
+    let payload = {
+        "payload": {
+          "image": {
+            "imageBytes": base64Encode
+          },
+        }
+      }
+
+    res.send(payload);
 });
 
 module.exports = router;
