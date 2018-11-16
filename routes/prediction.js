@@ -16,9 +16,26 @@ const bucketName = 'nearlinetest-mark';
 
 /* GET users listing. */
 router.get('/:fileName', function(req, res, next) {
+    let srcPath = './public/uploads/'
     let fileName = Buffer(req.params.fileName, 'base64').toString()
+    let payloadFile = `${srcPath}${fileName}.json`
 
-    console.log(fileName)
+    let filePath = `${srcPath}${fileName}`
+    let bitmap = fs.readFileSync(filePath);
+    let imageBase64 = new Buffer(bitmap).toString('base64');
+
+    let payload = {
+        "payload": {
+            "image": {
+                "imageBytes": imageBase64
+            },
+        }
+    }
+
+    fs.writeFileSync(payloadFile, JSON.stringify(payload))
+
+    res.send(payload);
+    
     // exec('pwd', (err, path, stderr) => {
     //     if (err) {
     //         return
