@@ -3,16 +3,28 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var cors = require('cors')
 var sassMiddleware = require('node-sass-middleware');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var uploadRouter = require('./routes/upload');
+var uploadDetectRouter = require('./routes/uploadDetect');
 var visionRouter = require('./routes/vision');
 var metaRouter = require('./routes/meta');
 var filesRouter = require('./routes/files');
 
+const corsOptions = {
+  origin: [
+    'http://localhost:8080',
+  ],
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+  allowedHeaders: ['Content-Type', 'Authorization'],
+};
+
 var app = express();
+
+app.use(cors(corsOptions));
 
 // view engine setup
 app.engine('ejs', require('express-ejs-extend'));
@@ -37,6 +49,7 @@ app.use('/vision', visionRouter);
 app.use('/meta', metaRouter);
 app.use('/files', filesRouter);
 app.use('/upload/image', uploadRouter);
+app.use('/upload/detect/image', uploadDetectRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
