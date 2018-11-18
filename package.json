@@ -9,6 +9,7 @@
     "@google-cloud/automl": "^0.1.2",
     "@google-cloud/storage": "^1.7.0",
     "@google-cloud/vision": "googleapis/nodejs-vision",
+    "body-parser": "^1.18.3",
     "cookie-parser": "~1.4.3",
     "cors": "^2.8.5",
     "debug": "~2.6.9",
