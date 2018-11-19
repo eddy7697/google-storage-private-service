@@ -14,11 +14,9 @@ const modelId = 'ICN4828686137575711807'
 router.get('/:fileName', function(req, res, next) {
     let srcPath = './public/uploads/'
     let fileName = Buffer(req.params.fileName, 'base64').toString()
+    let filePath = `${srcPath}${fileName}`    
     
-
-    let filePath = `${srcPath}${fileName}`
-    
-    
+    // compress image to speed up prediction
     compress.image(filePath, `${srcPath}compressed/`).then(response => {
         let bitmap = fs.readFileSync(`${srcPath}compressed/${fileName}`)
         let imageBase64 = new Buffer(bitmap).toString('base64')
@@ -53,10 +51,7 @@ router.get('/:fileName', function(req, res, next) {
         })
     }).catch(err => {
         res.send(err)
-        console.log(err)
     })
-    
-
 })
 
 module.exports = router;
