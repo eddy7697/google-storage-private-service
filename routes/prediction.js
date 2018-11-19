@@ -3,7 +3,7 @@ const router = express.Router()
 const fs = require('fs')
 const { exec } = require('child_process')
 const Buffer = require('buffer').Buffer
-const compress = require('./common/compress-method.js')
+const compress = require('../common/compress-method.js')
 
 // variable
 const projectId = 'tonal-bank-198910'
