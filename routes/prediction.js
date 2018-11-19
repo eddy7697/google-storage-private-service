@@ -1,4 +1,5 @@
 const express = require('express')
+var compress_images = require('compress-images')
 const router = express.Router()
 const fs = require('fs')
 const { exec } = require('child_process')
@@ -19,6 +20,44 @@ router.get('/:fileName', function(req, res, next) {
     let filePath = `${srcPath}${fileName}`
     let bitmap = fs.readFileSync(filePath);
     let imageBase64 = new Buffer(bitmap).toString('base64');
+
+    let compressImage = new Promise((resolve, reject) => {        
+        compress_images(filePath, srcPath, {
+            compress_force: false,
+            statistic: true,
+            autoupdate: true
+        }, false, {
+            jpg: {
+                engine: 'mozjpeg',
+                command: ['-quality', '60']
+            }
+        }, {
+            png: {
+                engine: 'pngquant',
+                command: ['--quality=20-50']
+            }
+        }, {
+            gif: {
+                engine: 'gifsicle',
+                command: ['--colors', '64', '--use-col=web']
+            }
+        }, function(error, completed, statistic) {
+            console.log('-------------');
+            console.log(error);
+            console.log(completed);
+            console.log(statistic);
+            console.log('-------------');
+            if (error) {
+                reject('error')
+            } else {
+                resolve('success')
+            }
+        })
+    })
+
+    compressImage.then(res => {
+        console.log(res)
+    })
 
     // generate payload
     let payload = {
