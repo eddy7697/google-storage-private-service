@@ -9,7 +9,7 @@ const storage = new Storage({
 
 const bucketName = 'nearlinetest-mark';
 
-router.get('/', (res, req, next) => {
+router.get('/', (req, res, next) => {
   res.send('GET request to the homepage');
 })
 
