@@ -1,10 +1,9 @@
 const express = require('express')
-var compress_images = require('compress-images')
 const router = express.Router()
 const fs = require('fs')
 const { exec } = require('child_process')
-const automl = require('@google-cloud/automl')
 const Buffer = require('buffer').Buffer
+const compress = require('./common/compress-method.js')
 
 // variable
 const projectId = 'tonal-bank-198910'
@@ -31,6 +30,12 @@ router.get('/:fileName', function(req, res, next) {
     }
 
     fs.writeFileSync(payloadFile, JSON.stringify(payload))
+    
+    compress.image().then(res => {
+        console.log(res)
+    }).catch(err => {
+        console.log(err)
+    })
     
     // image prediction
     exec('pwd', (err, path, stderr) => {
