@@ -3,7 +3,7 @@ const compress_images = require('compress-images')
 module.exports.image = image
 
 async function image(filePath, outputPath) {
-    compress_images(INPUT_path_to_your_images, OUTPUT_path, {compress_force: false, statistic: true, autoupdate: true}, false,
+    compress_images(filePath, outputPath, {compress_force: false, statistic: true, autoupdate: true}, false,
         {jpg: {engine: 'mozjpeg', command: ['-quality', '60']}},
         {png: {engine: 'pngquant', command: ['--quality=20-50']}},
         {svg: {engine: 'svgo', command: '--multipass'}},
