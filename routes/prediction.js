@@ -31,7 +31,7 @@ router.get('/:fileName', function(req, res, next) {
 
     fs.writeFileSync(payloadFile, JSON.stringify(payload))
     
-    compress.image(filePath, srcPath).then(res => {
+    compress.image(filePath, srcPath).then(response => {
         // image prediction
         exec('pwd', (err, path, stderr) => {
             if (err) {
