@@ -21,7 +21,8 @@ const corsOptions = {
     'http://localhost:8080',
     'http://localhost:8081',
     'http://google.egith.net',
-    'http://markinformation-inc.xyz'
+    'http://markinformation-inc.xyz',
+    'https://markinformation-inc.xyz'
   ],
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
   allowedHeaders: ['Content-Type', 'Authorization'],
