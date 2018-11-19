@@ -27,17 +27,17 @@ router.get('/:fileName', function(req, res, next) {
         autoupdate: true
     }, false, {
         jpg: {
-            engine: 'mozjpeg',
+            'engine': 'mozjpeg',
             command: ['-quality', '60']
         }
     }, {
         png: {
-            engine: 'pngquant',
+            'engine': 'pngquant',
             command: ['--quality=20-50']
         }
     }, {
         gif: {
-            engine: 'gifsicle',
+            'engine': 'gifsicle',
             command: ['--colors', '64', '--use-col=web']
         }
     }, function(error, completed, statistic) {
