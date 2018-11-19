@@ -17,7 +17,7 @@ router.post('/', function(req, res, next) {
   // const filePath = './uploads';
 
   fs.readdir(filePath, function (err, files) {
-    console.log(files);
+    // console.log(files);
   })
   
   form.on('file', function(field, file) {
