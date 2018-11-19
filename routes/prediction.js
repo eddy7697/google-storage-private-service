@@ -18,53 +18,36 @@ router.get('/:fileName', function(req, res, next) {
     let payloadFile = `${srcPath}${fileName}.json`
 
     let filePath = `${srcPath}${fileName}`
+    let bitmap = fs.readFileSync(filePath);
+    let imageBase64 = new Buffer(bitmap).toString('base64');
 
+    // generate payload
+    let payload = {
+        "payload": {
+            "image": {
+                "imageBytes": imageBase64
+            },
+        }
+    }
 
-    // let bitmap = fs.readFileSync(filePath);
-    // let imageBase64 = new Buffer(bitmap).toString('base64');
-
-    compress_images(filePath, srcPath, {compress_force: false, statistic: true, autoupdate: true}, false,
-        {jpg: {engine: 'mozjpeg', command: ['-quality', '60']}},
-        {png: {engine: 'pngquant', command: ['--quality=20-50']}},
-        {svg: {engine: 'svgo', command: '--multipass'}},
-        {gif: {engine: 'gifsicle', command: ['--colors', '64', '--use-col=web']}}, function(error, completed, statistic){
-        
-            
-        let bitmap = fs.readFileSync(filePath);
-        let imageBase64 = new Buffer(bitmap).toString('base64');
-
-        // generate payload
-        let payload = {
-            "payload": {
-                "image": {
-                    "imageBytes": imageBase64
-                },
-            }
+    fs.writeFileSync(payloadFile, JSON.stringify(payload))
+    
+    // image prediction
+    exec('pwd', (err, path, stderr) => {
+        if (err) {
+            return
         }
 
-        fs.writeFileSync(payloadFile, JSON.stringify(payload))
-        
-        // image prediction
-        exec('pwd', (err, path, stderr) => {
-            if (err) {
+        exec(`curl -X POST -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $(gcloud auth application-default print-access-token)" \
+            https://automl.googleapis.com/v1beta1/projects/${projectId}/locations/${location}/models/${modelId}:predict -d @${path.substring(0, path.length-1)}${payloadFile.substr(1)}`, (error, stdout, stderr) => {
+            if (error) {
                 return
             }
 
-            exec(`curl -X POST -H "Content-Type: application/json" \
-                -H "Authorization: Bearer $(gcloud auth application-default print-access-token)" \
-                https://automl.googleapis.com/v1beta1/projects/${projectId}/locations/${location}/models/${modelId}:predict -d @${path.substring(0, path.length-1)}${payloadFile.substr(1)}`, (error, stdout, stderr) => {
-                if (error) {
-                    return
-                }
-
-                res.send(stdout)
-            })  
-        })
-
-
-    });
-
-    
+            res.send(stdout)
+        })  
+    })
 })
 
 module.exports = router;
