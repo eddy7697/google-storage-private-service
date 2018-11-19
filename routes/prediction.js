@@ -28,17 +28,17 @@ router.get('/:fileName', function(req, res, next) {
     }, false, {
         jpg: {
             'engine': 'mozjpeg',
-            command: ['-quality', '60']
+            'command': ['-quality', '60']
         }
     }, {
         png: {
             'engine': 'pngquant',
-            command: ['--quality=20-50']
+            'command': ['--quality=20-50']
         }
     }, {
         gif: {
             'engine': 'gifsicle',
-            command: ['--colors', '64', '--use-col=web']
+            'command': ['--colors', '64', '--use-col=web']
         }
     }, function(error, completed, statistic) {
         console.log('-------------');
