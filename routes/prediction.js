@@ -31,7 +31,7 @@ router.get('/:fileName', function(req, res, next) {
 
     fs.writeFileSync(payloadFile, JSON.stringify(payload))
     
-    compress.image().then(res => {
+    compress.image(filePath, srcPath).then(res => {
         console.log(res)
     }).catch(err => {
         console.log(err)
