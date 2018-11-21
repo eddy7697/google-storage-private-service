@@ -24,9 +24,9 @@ router.get('/:fileName', function(req, res, next) {
     
     // compress image to speed up prediction
     compress.image(filePath, `${srcPath}compressed/`).then(response => {
-        let bitmap = fs.readFileSync(`${srcPath}compressed/${fileName}`)
+        let bitmap = fs.readFileSync(`${srcPath}compressed/${validFileName}`)
         let imageBase64 = new Buffer(bitmap).toString('base64')
-        let payloadFile = `${srcPath}payload/${fileName}.json`
+        let payloadFile = `${srcPath}payload/${validFileName}.json`
 
         // generate payload
         let payload = {
