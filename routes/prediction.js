@@ -16,7 +16,7 @@ router.get('/:fileName', function(req, res, next) {
     let fileName = Buffer(req.params.fileName, 'base64').toString()
     let validFileName = fileName.replace(/[/\\?%*: |"<>]/g, '_')
 
-    if (validFileName !== fileName) {
+    if (validFileName !== fileName && fs.existsSync(`${srcPath}${fileName}`)) {
         fs.renameSync(`${srcPath}${fileName}`, `${srcPath}${validFileName}`)
     }
 
