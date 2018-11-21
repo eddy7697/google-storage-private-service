@@ -14,7 +14,13 @@ const modelId = 'ICN4828686137575711807'
 router.get('/:fileName', function(req, res, next) {
     let srcPath = './public/uploads/'
     let fileName = Buffer(req.params.fileName, 'base64').toString()
-    let filePath = `${srcPath}${fileName}`    
+    let validFileName = fileName.replace(/[/\\?%*: |"<>]/g, '_')
+
+    if (validFileName !== fileName) {
+        fs.renameSync(`${srcPath}${fileName}`, `${srcPath}${validFileName}`)
+    }
+
+    let filePath = `${srcPath}${validFileName}`    
     
     // compress image to speed up prediction
     compress.image(filePath, `${srcPath}compressed/`).then(response => {
