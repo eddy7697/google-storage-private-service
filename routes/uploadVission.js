@@ -31,17 +31,17 @@ router.post('/', function(req, res, next) {
     fs.rename(file.path, form.uploadDir + "/" + file.name);
   });
 
-  // client
-  //   .labelDetection(form.uploadDir + "/" + file.name)
-  //   .then(results => {
-  //     const labels = results[0].labelAnnotations;
+  client
+    .labelDetection(form.uploadDir + "/" + file.name)
+    .then(results => {
+      const labels = results[0].labelAnnotations;
 
-  //     res.send(results);
-  //   })
-  //   .catch(err => {
-  //     console.error('ERROR:', err);
-  //   });
-  res.send('Success ok');
+      res.send(results);
+    })
+    .catch(err => {
+      console.error('ERROR:', err);
+    });
+  // res.send('Success ok');
 
 });
 
