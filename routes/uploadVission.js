@@ -44,6 +44,8 @@ router.post('/', function(req, res, next) {
     //     reject(err)
     //     console.error('ERROR:', err);
     //   });
+
+    console.log(1231234);
     client
       .labelDetection("/root/google-storage-private-service/uploads/" + file.name)
       .then(results => {
