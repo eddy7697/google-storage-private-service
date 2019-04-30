@@ -26,21 +26,35 @@ router.post('/', function(req, res, next) {
   // })
   
   // console.log()
-  let result = form.on('file', function(field, file) {
+  form.on('file', function(field, file) {
     //rename the incoming file to the file's name
     fs.rename(file.path, form.uploadDir + "/" + file.name);
 
-    client
-      .labelDetection(form.uploadDir + "/" + file.name)
-      .then(results => {
-        const labels = results[0].labelAnnotations;
-
-        res.send(labels);
-        console.log(labels)
+    storage
+      .bucket(bucketName)
+      .upload(form.uploadDir + "/" + file.name, {
+        gzip: true,
+        metadata: {
+          cacheControl: 'public, max-age=31536000',
+        },
+      })
+      .then(() => {
       })
       .catch(err => {
+        reject(err)
         console.error('ERROR:', err);
       });
+    // client
+    //   .labelDetection(form.uploadDir + "/" + file.name)
+    //   .then(results => {
+    //     const labels = results[0].labelAnnotations;
+
+    //     res.send(labels);
+    //     console.log(labels)
+    //   })
+    //   .catch(err => {
+    //     console.error('ERROR:', err);
+    //   });
   });
 
   
