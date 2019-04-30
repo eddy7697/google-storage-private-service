@@ -52,7 +52,7 @@ router.get('/:fileName', function(req, res, next) {
                     return
                 }
 
-                console.log(`https://automl.googleapis.com/v1beta1/projects/${projectId}/locations/${location}/models/${modelId}:predict -d @${path.substring(0, path.length-1)}${payloadFile.substr(1)})
+                console.log(`https://automl.googleapis.com/v1beta1/projects/${projectId}/locations/${location}/models/${modelId}:predict -d @${path.substring(0, path.length-1)}${payloadFile.substr(1)}`)
 
                 res.send(stdout)
             })  
