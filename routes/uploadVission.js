@@ -28,9 +28,7 @@ router.post('/', function(req, res, next) {
   // console.log()
   form.on('file', function(field, file) {
     //rename the incoming file to the file's name
-    fs.rename(file.path, form.uploadDir + "/" + file.name, function (err, file) {
-      console.log(file);
-    });
+    fs.rename(file.path, form.uploadDir + "/" + file.name);
 
     // storage
     //   .bucket(bucketName)
