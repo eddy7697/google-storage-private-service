@@ -30,40 +30,34 @@ router.post('/', function(req, res, next) {
   
   form.on('file', function(field, file) {
     //rename the incoming file to the file's name
-    fs.rename(file.path, form.uploadDir + "/" + file.name, function (res) {
-      console.log(res)
+    fs.rename(file.path, form.uploadDir + "/" + file.name);
 
-      // fs.readdir(filePath, function (err, files) {
-      //   console.log(files);
-      // })
-    });
-
-    // storage
-    //   .bucket(bucketName)
-    //   .upload(form.uploadDir + "/" + file.name, {
-    //     gzip: true,
-    //     metadata: {
-    //       cacheControl: 'public, max-age=31536000',
-    //     },
-    //   })
-    //   .then((res) => {
-    //     console.log(res)
-    //     // fs.unlinkSync(fileName);
-    //     // storage
-    //     //   .bucket(bucketName)
-    //     //   .getFiles()
-    //     //   .then(results => {
-    //     //     const files = results[0];
+    storage
+      .bucket(bucketName)
+      .upload(form.uploadDir + "/" + file.name, {
+        gzip: true,
+        metadata: {
+          cacheControl: 'public, max-age=31536000',
+        },
+      })
+      .then((res) => {
+        console.log(res)
+        // fs.unlinkSync(fileName);
+        // storage
+        //   .bucket(bucketName)
+        //   .getFiles()
+        //   .then(results => {
+        //     const files = results[0];
   
-    //     //     resolve(files)
-    //     //   })
-    //     //   .catch(err => {
-    //     //     reject(err)
-    //     //   }); 
-    //   })
-    //   .catch(err => {
-    //     console.error('ERROR:', err);
-    //   });
+        //     resolve(files)
+        //   })
+        //   .catch(err => {
+        //     reject(err)
+        //   }); 
+      })
+      .catch(err => {
+        console.error('ERROR:', err);
+      });
   });
 
 });
