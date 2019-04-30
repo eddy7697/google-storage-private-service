@@ -26,7 +26,7 @@ router.post('/', function(req, res, next) {
   });
 
   form.parse(req, function(err, fields, files) {
-    res.redirect('/');
+    res.send(files);
     // res.end(util.inspect({fields: fields, files: files}));
   });
 });
