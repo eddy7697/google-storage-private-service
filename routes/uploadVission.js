@@ -14,11 +14,6 @@ var storage = new Storage({
 
 var bucketName = 'nearlinetest-mark';
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
-
 router.post('/', function(req, res, next) {
   const form = new formidable.IncomingForm();
   const filePath = './uploads';
@@ -30,21 +25,21 @@ router.post('/', function(req, res, next) {
     console.log(files);
   })
   
-  let result = form.on('file', function(field, file) {
-    //rename the incoming file to the file's name
-    fs.rename(file.path, form.uploadDir + "/" + file.name);
-  });
+  // let result = form.on('file', function(field, file) {
+  //   //rename the incoming file to the file's name
+  //   fs.rename(file.path, form.uploadDir + "/" + file.name);
+  // });
 
-  client
-    .labelDetection(form.uploadDir + "/" + file.name)
-    .then(results => {
-      const labels = results[0].labelAnnotations;
+  // client
+  //   .labelDetection(form.uploadDir + "/" + file.name)
+  //   .then(results => {
+  //     const labels = results[0].labelAnnotations;
 
-      res.send(results);
-    })
-    .catch(err => {
-      console.error('ERROR:', err);
-    });
+  //     res.send(results);
+  //   })
+  //   .catch(err => {
+  //     console.error('ERROR:', err);
+  //   });
   // res.send(result)
 
 });
