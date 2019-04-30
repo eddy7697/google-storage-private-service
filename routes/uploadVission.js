@@ -40,7 +40,8 @@ router.post('/', function(req, res, next) {
           cacheControl: 'public, max-age=31536000',
         },
       })
-      .then(() => {
+      .then((res) => {
+        console.log(res)
         // fs.unlinkSync(fileName);
         // storage
         //   .bucket(bucketName)
