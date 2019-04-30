@@ -45,21 +45,21 @@ router.post('/', function(req, res, next) {
     //     console.error('ERROR:', err);
     //   });
 
-    // console.log(1231234);
-    // client
-    //   .labelDetection("/root/google-storage-private-service/uploads/" + file.name)
-    //   .then(results => {
-    //     const labels = results[0].labelAnnotations;
+    console.log(1231234);
+    client
+      .labelDetection("/root/google-storage-private-service/uploads/" + file.name)
+      .then(results => {
+        const labels = results[0].labelAnnotations;
 
-    //     console.log(labels)
-    //   })
-    //   .catch(err => {
-    //     console.error('ERROR:', err);
-    //   });
+        console.log(labels)
+      })
+      .catch(err => {
+        console.error('ERROR:', err);
+      });
   });
 
   
-  res.send('Success ok');
+  // res.send('Success ok');
 
 });
 
