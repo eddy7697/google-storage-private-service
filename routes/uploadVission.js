@@ -41,7 +41,6 @@ router.post('/', function(req, res, next) {
         },
       })
       .then((res) => {
-        console.log(res)
         // fs.unlinkSync(fileName);
         // storage
         //   .bucket(bucketName)
