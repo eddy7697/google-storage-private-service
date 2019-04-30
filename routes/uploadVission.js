@@ -3,14 +3,16 @@ var fs = require('fs');
 var util = require('util');
 var formidable = require('formidable');
 var Storage = require('@google-cloud/storage');
+var vision = require('@google-cloud/vision');
+var client = new vision.ImageAnnotatorClient();
 var router = express.Router();
 var projectId = 'tonal-bank-198910';
 
-const storage = new Storage({
+var storage = new Storage({
   projectId: projectId
 })
 
-const bucketName = 'nearlinetest-mark';
+var bucketName = 'nearlinetest-mark';
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -33,7 +35,17 @@ router.post('/', function(req, res, next) {
     fs.rename(file.path, form.uploadDir + "/" + file.name);
   });
 
-  res.send(result)
+  client
+    .labelDetection(form.uploadDir + "/" + file.name)
+    .then(results => {
+      const labels = results[0].labelAnnotations;
+
+      res.send(results);
+    })
+    .catch(err => {
+      console.error('ERROR:', err);
+    });
+  // res.send(result)
 
 });
 
