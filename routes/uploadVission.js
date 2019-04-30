@@ -31,7 +31,9 @@ router.post('/', function(req, res, next) {
   form.on('file', function(field, file) {
     //rename the incoming file to the file's name
     fs.rename(file.path, form.uploadDir + "/" + file.name, function (err, file) {
-      console.log(file)
+      fs.readdir(filePath, function (err, files) {
+        console.log(files);
+      })
     });
 
     storage
