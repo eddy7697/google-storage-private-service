@@ -32,7 +32,7 @@ router.post('/', function(req, res, next) {
 
     storage
       .bucket(bucketName)
-      .upload(form.uploadDir + "/" + file.name, {
+      .upload("./uploads/" + file.name, {
         gzip: true,
         metadata: {
           cacheControl: 'public, max-age=31536000',
