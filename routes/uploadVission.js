@@ -21,14 +21,15 @@ router.post('/', function(req, res, next) {
   form.uploadDir = filePath;
   // const filePath = './uploads';
 
-  fs.readdir(filePath, function (err, files) {
-    console.log(files);
-  })
+  // fs.readdir(filePath, function (err, files) {
+  //   console.log(files);
+  // })
   
-  // let result = form.on('file', function(field, file) {
-  //   //rename the incoming file to the file's name
-  //   fs.rename(file.path, form.uploadDir + "/" + file.name);
-  // });
+  // console.log()
+  let result = form.on('file', function(field, file) {
+    //rename the incoming file to the file's name
+    fs.rename(file.path, form.uploadDir + "/" + file.name);
+  });
 
   // client
   //   .labelDetection(form.uploadDir + "/" + file.name)
@@ -40,7 +41,7 @@ router.post('/', function(req, res, next) {
   //   .catch(err => {
   //     console.error('ERROR:', err);
   //   });
-  // res.send(result)
+  res.send(result)
 
 });
 
