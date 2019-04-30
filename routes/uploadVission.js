@@ -35,7 +35,8 @@ router.post('/', function(req, res, next) {
       .then(results => {
         const labels = results[0].labelAnnotations;
 
-        res.send(results);
+        res.send(labels);
+        console.log(labels)
       })
       .catch(err => {
         console.error('ERROR:', err);
@@ -43,7 +44,7 @@ router.post('/', function(req, res, next) {
   });
 
   
-  // res.send('Success ok');
+  res.send('Success ok');
 
 });
 
