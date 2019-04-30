@@ -13,7 +13,7 @@ router.get('/', function(req, res, next) {
 
 router.post('/', function(req, res, next) {
   const form = new formidable.IncomingForm();
-  const filePath = './uploads';
+  const filePath = './public/uploads';
 
   form.uploadDir = filePath;
   // const filePath = './uploads';
@@ -34,7 +34,10 @@ router.post('/', function(req, res, next) {
       .then(results => {
         const labels = results[0].labelAnnotations;
 
-        res.send(results);
+        res.send({
+          file: '/public/uploads' + files.file.name,
+          labels: labels
+        });
       })
       .catch(err => {
         console.error('ERROR:', err);
