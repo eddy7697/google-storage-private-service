@@ -28,40 +28,12 @@ router.post('/', function(req, res, next) {
     console.log(files);
   })
   
-  form.on('file', function(field, file) {
+  let result = form.on('file', function(field, file) {
     //rename the incoming file to the file's name
-    fs.rename(file.path, form.uploadDir + "/" + file.name, function (err, file) {
-      fs.readdir(filePath, function (err, files) {
-        console.log(files);
-      })
-    });
-
-    storage
-      .bucket(bucketName)
-      .upload(form.uploadDir + "/" + file.name, {
-        gzip: true,
-        metadata: {
-          cacheControl: 'public, max-age=31536000',
-        },
-      })
-      .then((res) => {
-        // fs.unlinkSync(fileName);
-        // storage
-        //   .bucket(bucketName)
-        //   .getFiles()
-        //   .then(results => {
-        //     const files = results[0];
-  
-        //     resolve(files)
-        //   })
-        //   .catch(err => {
-        //     reject(err)
-        //   }); 
-      })
-      .catch(err => {
-        console.error('ERROR:', err);
-      });
+    fs.rename(file.path, form.uploadDir + "/" + file.name);
   });
+
+  res.send(result)
 
 });
 
