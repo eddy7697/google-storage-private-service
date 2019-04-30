@@ -41,7 +41,7 @@ router.post('/', function(req, res, next) {
   //   .catch(err => {
   //     console.error('ERROR:', err);
   //   });
-  res.send(result)
+  res.send('Success ok');
 
 });
 
