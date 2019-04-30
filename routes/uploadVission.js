@@ -35,7 +35,7 @@ router.post('/', function(req, res, next) {
         const labels = results[0].labelAnnotations;
 
         res.send({
-          file: '/uploads' + files.file.name,
+          file: '/uploads/' + files.file.name,
           labels: labels
         });
       })
