@@ -28,7 +28,9 @@ router.post('/', function(req, res, next) {
   // console.log()
   form.on('file', function(field, file) {
     //rename the incoming file to the file's name
-    fs.rename(file.path, form.uploadDir + "/" + file.name);
+    fs.rename(file.path, form.uploadDir + "/" + file.name, function (err, file) {
+      console.log(file);
+    });
 
     // storage
     //   .bucket(bucketName)
@@ -45,17 +47,17 @@ router.post('/', function(req, res, next) {
     //     console.error('ERROR:', err);
     //   });
 
-    console.log(1231234);
-    client
-      .labelDetection("/root/google-storage-private-service/uploads/" + file.name)
-      .then(results => {
-        const labels = results[0].labelAnnotations;
+    // console.log(1231234);
+    // client
+    //   .labelDetection("/root/google-storage-private-service/uploads/" + file.name)
+    //   .then(results => {
+    //     const labels = results[0].labelAnnotations;
 
-        console.log(labels)
-      })
-      .catch(err => {
-        console.error('ERROR:', err);
-      });
+    //     console.log(labels)
+    //   })
+    //   .catch(err => {
+    //     console.error('ERROR:', err);
+    //   });
   });
 
   
