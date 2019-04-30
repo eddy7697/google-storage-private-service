@@ -29,18 +29,20 @@ router.post('/', function(req, res, next) {
   let result = form.on('file', function(field, file) {
     //rename the incoming file to the file's name
     fs.rename(file.path, form.uploadDir + "/" + file.name);
+
+    client
+      .labelDetection(form.uploadDir + "/" + file.name)
+      .then(results => {
+        const labels = results[0].labelAnnotations;
+
+        res.send(results);
+      })
+      .catch(err => {
+        console.error('ERROR:', err);
+      });
   });
 
-  client
-    .labelDetection(form.uploadDir + "/" + file.name)
-    .then(results => {
-      const labels = results[0].labelAnnotations;
-
-      res.send(results);
-    })
-    .catch(err => {
-      console.error('ERROR:', err);
-    });
+  
   // res.send('Success ok');
 
 });
