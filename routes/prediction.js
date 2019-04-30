@@ -52,6 +52,8 @@ router.get('/:fileName', function(req, res, next) {
                     return
                 }
 
+                console.log(stdout)
+
                 res.send(stdout)
             })  
         })
