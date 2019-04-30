@@ -11,6 +11,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var uploadRouter = require('./routes/upload');
 var uploadDetectRouter = require('./routes/uploadDetect');
+var uploadVissionRouter = require('./routes/uploadVission');
 var visionRouter = require('./routes/vision');
 var metaRouter = require('./routes/meta');
 var filesRouter = require('./routes/files');
@@ -57,6 +58,7 @@ app.use('/vision', visionRouter);
 app.use('/meta', metaRouter);
 app.use('/files', filesRouter);
 app.use('/upload/image', uploadRouter);
+app.use('/upload/vission/image', uploadVissionRouter);
 app.use('/upload/detect/image', uploadDetectRouter)
 app.use('/prediction', predictionRouter)
 
