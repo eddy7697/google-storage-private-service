@@ -3,6 +3,8 @@ var fs = require('fs');
 var util = require('util');
 var formidable = require('formidable');
 var router = express.Router();
+var vision = require('@google-cloud/vision');
+var client = new vision.ImageAnnotatorClient();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -26,7 +28,18 @@ router.post('/', function(req, res, next) {
   });
 
   form.parse(req, function(err, fields, files) {
-    res.send(files);
+    // res.send(files);
+    client
+      .labelDetection(filePath + "/" + file.name)
+      .then(results => {
+        const labels = results[0].labelAnnotations;
+
+        res.send(labels);
+        console.log(labels)
+      })
+      .catch(err => {
+        console.error('ERROR:', err);
+      });
     // res.end(util.inspect({fields: fields, files: files}));
   });
 });
