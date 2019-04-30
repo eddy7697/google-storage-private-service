@@ -33,7 +33,7 @@ router.post('/', function(req, res, next) {
     fs.rename(file.path, form.uploadDir + "/" + file.name, function (res) {
       // console.log(res)
 
-      fs.readdir(filePath, function (err, files) {
+      fs.readdir('./uploads', function (err, files) {
         console.log(files);
       })
     });
