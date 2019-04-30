@@ -26,40 +26,39 @@ router.post('/', function(req, res, next) {
   // })
   
   // console.log()
-  form.on('file', function(field, file) {
+  let result = form.on('file', function(field, file) {
     //rename the incoming file to the file's name
     fs.rename(file.path, form.uploadDir + "/" + file.name);
 
-    // storage
-    //   .bucket(bucketName)
-    //   .upload("./uploads/" + file.name, {
-    //     gzip: true,
-    //     metadata: {
-    //       cacheControl: 'public, max-age=31536000',
-    //     },
-    //   })
-    //   .then(() => {
-    //   })
-    //   .catch(err => {
-    //     reject(err)
-    //     console.error('ERROR:', err);
-    //   });
-
-    console.log(1231234);
-    client
-      .labelDetection("/root/google-storage-private-service/uploads/" + file.name)
-      .then(results => {
-        const labels = results[0].labelAnnotations;
-
-        console.log(labels)
+    storage
+      .bucket(bucketName)
+      .upload(form.uploadDir + "/" + file.name, {
+        gzip: true,
+        metadata: {
+          cacheControl: 'public, max-age=31536000',
+        },
+      })
+      .then(() => {
       })
       .catch(err => {
+        reject(err)
         console.error('ERROR:', err);
       });
+    // client
+    //   .labelDetection(form.uploadDir + "/" + file.name)
+    //   .then(results => {
+    //     const labels = results[0].labelAnnotations;
+
+    //     res.send(labels);
+    //     console.log(labels)
+    //   })
+    //   .catch(err => {
+    //     console.error('ERROR:', err);
+    //   });
   });
 
   
-  // res.send('Success ok');
+  res.send('Success ok');
 
 });
 
