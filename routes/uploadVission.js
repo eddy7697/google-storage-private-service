@@ -28,18 +28,18 @@ router.post('/', function(req, res, next) {
   });
 
   form.parse(req, function(err, fields, files) {
-    res.send(files);
-    // client
-    //   .labelDetection(filePath + "/" + file.name)
-    //   .then(results => {
-    //     const labels = results[0].labelAnnotations;
+    // res.send(files);
+    client
+      .labelDetection(filePath + "/" + files.file.name)
+      .then(results => {
+        const labels = results[0].labelAnnotations;
 
-    //     res.send(labels);
-    //     console.log(labels)
-    //   })
-    //   .catch(err => {
-    //     console.error('ERROR:', err);
-    //   });
+        res.send(labels);
+        console.log(labels)
+      })
+      .catch(err => {
+        console.error('ERROR:', err);
+      });
     // res.end(util.inspect({fields: fields, files: files}));
   });
 });
