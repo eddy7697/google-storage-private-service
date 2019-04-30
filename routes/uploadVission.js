@@ -44,20 +44,19 @@ router.post('/', function(req, res, next) {
     //     reject(err)
     //     console.error('ERROR:', err);
     //   });
-    
+    client
+      .labelDetection("/root/google-storage-private-service/uploads/" + file.name)
+      .then(results => {
+        const labels = results[0].labelAnnotations;
+
+        console.log(labels)
+      })
+      .catch(err => {
+        console.error('ERROR:', err);
+      });
   });
 
-  client
-    .labelDetection("/root/google-storage-private-service/uploads/" + file.name)
-    .then(results => {
-      const labels = results[0].labelAnnotations;
-
-      res.send(labels);
-      console.log(labels)
-    })
-    .catch(err => {
-      console.error('ERROR:', err);
-    });
+  
   // res.send('Success ok');
 
 });
